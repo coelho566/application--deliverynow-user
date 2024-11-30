@@ -3,6 +3,7 @@ package com.deliverynow.user.infrastructure.config;
 import com.deliverynow.user.application.presenter.CustomerPresenter;
 import com.deliverynow.user.application.usecase.impl.CreateSessionCustomerUseCaseImpl;
 import com.deliverynow.user.application.usecase.impl.GetCustomerByDocumentUseCaseImpl;
+import com.deliverynow.user.application.usecase.impl.GetCustomerBySessionUseCaseImpl;
 import com.deliverynow.user.application.usecase.impl.InsertCustomerUseCaseImpl;
 import com.deliverynow.user.domain.gateway.AddressGateway;
 import com.deliverynow.user.domain.gateway.CustomerGateway;
@@ -25,5 +26,10 @@ public class CustomerUsaCaseConfig {
     @Default
     public CreateSessionCustomerUseCaseImpl createSessionCustomerUseCase(CustomerGateway customerGateway) {
         return new CreateSessionCustomerUseCaseImpl(customerGateway);
+    }
+
+    @Default
+    public GetCustomerBySessionUseCaseImpl getCustomerBySessionUseCase(CustomerGateway customerGateway) {
+        return new GetCustomerBySessionUseCaseImpl(customerGateway);
     }
 }

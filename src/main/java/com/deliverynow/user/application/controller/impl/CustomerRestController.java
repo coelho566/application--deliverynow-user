@@ -6,18 +6,22 @@ import com.deliverynow.user.application.controller.CustomerController;
 import com.deliverynow.user.application.presenter.CustomerPresenter;
 import com.deliverynow.user.application.usecase.CreateSessionCustomerUseCase;
 import com.deliverynow.user.application.usecase.GetCustomerByDocumentUseCase;
+import com.deliverynow.user.application.usecase.GetCustomerBySessionUseCase;
 import com.deliverynow.user.application.usecase.InsertCustomerUseCase;
 
 public class CustomerRestController implements CustomerController {
 
     InsertCustomerUseCase insertCustomerUseCase;
     GetCustomerByDocumentUseCase getCustomerByDocumentUseCase;
+    GetCustomerBySessionUseCase getCustomerBySessionUseCase;
     CreateSessionCustomerUseCase createSessionCustomerUseCase;
     CustomerPresenter customerPresenter;
 
-    public CustomerRestController(InsertCustomerUseCase insertCustomerUseCase, GetCustomerByDocumentUseCase getCustomerByDocumentUseCase, CreateSessionCustomerUseCase createSessionCustomerUseCase, CustomerPresenter customerPresenter) {
+    public CustomerRestController(InsertCustomerUseCase insertCustomerUseCase, GetCustomerByDocumentUseCase getCustomerByDocumentUseCase,
+                                  GetCustomerBySessionUseCase getCustomerBySessionUseCase, CreateSessionCustomerUseCase createSessionCustomerUseCase, CustomerPresenter customerPresenter) {
         this.insertCustomerUseCase = insertCustomerUseCase;
         this.getCustomerByDocumentUseCase = getCustomerByDocumentUseCase;
+        this.getCustomerBySessionUseCase = getCustomerBySessionUseCase;
         this.createSessionCustomerUseCase = createSessionCustomerUseCase;
         this.customerPresenter = customerPresenter;
     }
@@ -30,6 +34,12 @@ public class CustomerRestController implements CustomerController {
     @Override
     public CustomerResponse getCustomer(String document) {
         var customer = getCustomerByDocumentUseCase.getUserByDocument(document);
+        return customerPresenter.domainToResponse(customer);
+    }
+
+    @Override
+    public CustomerResponse getCustomerBySessionId(String sessionId) {
+        var customer = getCustomerBySessionUseCase.getUserBySession(sessionId);
         return customerPresenter.domainToResponse(customer);
     }
 

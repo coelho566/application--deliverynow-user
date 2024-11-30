@@ -4,6 +4,7 @@ import com.deliverynow.user.application.controller.impl.CustomerRestController;
 import com.deliverynow.user.application.presenter.CustomerPresenter;
 import com.deliverynow.user.application.usecase.CreateSessionCustomerUseCase;
 import com.deliverynow.user.application.usecase.GetCustomerByDocumentUseCase;
+import com.deliverynow.user.application.usecase.GetCustomerBySessionUseCase;
 import com.deliverynow.user.application.usecase.InsertCustomerUseCase;
 import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Default;
@@ -12,7 +13,8 @@ import jakarta.enterprise.inject.Default;
 public class CustomerControllerConfig {
 
     @Default
-    public CustomerRestController customerRestController(InsertCustomerUseCase insertCustomerUseCase, GetCustomerByDocumentUseCase getCustomerByDocumentUseCase, CreateSessionCustomerUseCase createSessionCustomerUseCase, CustomerPresenter customerPresenter) {
-        return new CustomerRestController(insertCustomerUseCase, getCustomerByDocumentUseCase, createSessionCustomerUseCase, customerPresenter);
+    public CustomerRestController customerRestController(InsertCustomerUseCase insertCustomerUseCase, GetCustomerByDocumentUseCase getCustomerByDocumentUseCase,
+                                                         GetCustomerBySessionUseCase getCustomerBySessionUseCase, CreateSessionCustomerUseCase createSessionCustomerUseCase, CustomerPresenter customerPresenter) {
+        return new CustomerRestController(insertCustomerUseCase, getCustomerByDocumentUseCase,getCustomerBySessionUseCase, createSessionCustomerUseCase, customerPresenter);
     }
 }

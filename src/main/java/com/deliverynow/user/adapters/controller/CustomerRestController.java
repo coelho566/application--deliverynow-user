@@ -38,6 +38,14 @@ public class CustomerRestController {
     }
 
     @GET
+    @Path("session/{sessionId}")
+    @Operation(summary = "Buscar cliente por documento")
+    public RestResponse<BaseResponse<CustomerResponse>> getCustomerBySession(@PathParam("sessionId") String id) {
+        var clientResponse = customerController.getCustomerBySessionId(id);
+        return RestResponse.ok(new BaseResponse<>(clientResponse));
+    }
+
+    @GET
     @Path("session")
     @Operation(summary = "Criar sessão do cliente")
     public RestResponse<BaseResponse<String>> getClientSession(@QueryParam("document") String document) {

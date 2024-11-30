@@ -8,6 +8,7 @@ public interface CustomerController {
     void insertCustomer(CustomerRequest customerRequest);
 
     CustomerResponse getCustomer(String document);
+    CustomerResponse getCustomerBySessionId(String sessionId);
 
     String getCustomerSession(String document);
 }
