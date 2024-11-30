@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: apireplicate
-          image: 836507624722.dkr.ecr.us-east-1.amazonaws.com/deliverynow-ecr:latest
+          image: 836507624722.dkr.ecr.us-east-1.amazonaws.com/application-deliverynow-user-ecr:latest
 #          env:
 #            - name: URL_WEBHOOK
 #              valueFrom:
