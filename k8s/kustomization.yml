@@ -3,10 +3,7 @@ kind: Kustomization
 metadata:
   name: deliverynow-user-kustomization
 resources:
-#  - db-configmap.yml
-#  - pod-mongodb.yaml
-#  - svc-mongodb.yml
-#  - app-configmap.yml
   - app-hpa.yml
+  - metrics.yaml
   - app-deployment.yml
   - svc-application.yml
