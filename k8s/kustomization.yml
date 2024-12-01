@@ -4,6 +4,6 @@ metadata:
   name: deliverynow-user-kustomization
 resources:
   - app-hpa.yml
-  - metrics.yaml
+#  - metrics.yaml
   - app-deployment.yml
   - svc-application.yml
