@@ -5,4 +5,3 @@
 -- insert into myentity (id, field) values(3, 'field-3');
 -- alter sequence myentity_seq restart with 4;
 -- GRANT ALL PRIVILEGES ON db-teste.* TO 'root'@'localhost';
-CREATE DATABASE IF NOT EXISTS deliverynow-db;

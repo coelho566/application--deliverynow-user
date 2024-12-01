@@ -4,6 +4,26 @@
       branches:
         - main
   jobs:
+    unit-test:
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v3
+          with:
+            fetch-depth: 0
+
+        - run: mvn test
+        - name: Generate JaCoCo Badge
+          id: jacoco
+          uses: cicirello/jacoco-badge-generator@v2.0.1
+        - name: Log coverage percentage
+          run: |
+            echo "coverage = ${{ steps.jacoco.outputs.coverage }}"
+            echo "branch coverage = ${{ steps.jacoco.outputs.branches }}"
+        - name: Upload JaCoCo coverage report
+          uses: actions/upload-artifact@v4.4.0
+          with:
+            name: jacoco-report
+            path: target/jacoco-report/
     build:
       runs-on: ubuntu-latest
       steps:
@@ -49,9 +69,16 @@
           env:
             ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
             ECR_REPOSITORY: ${{ secrets.REPO_NAME }}
+            QUARKUS_DATASOURCE_JDBC_URL: ${{ secrets.QUARKUS_DATASOURCE_JDBC_URL }}
+            QUARKUS_DATASOURCE_USERNAME: ${{ secrets.QUARKUS_DATASOURCE_USERNAME }}
+            QUARKUS_DATASOURCE_PASSWORD: ${{ secrets.QUARKUS_DATASOURCE_PASSWORD }}
             IMAGE_TAG: latest
           run: |
-            docker build -f src/main/docker/Dockerfile.jvm -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+            docker build -f src/main/docker/Dockerfile.jvm \
+            --build-arg QUARKUS_DATASOURCE_JDBC_URL=$QUARKUS_DATASOURCE_JDBC_URL \
+            --build-arg QUARKUS_DATASOURCE_USERNAME=$QUARKUS_DATASOURCE_USERNAME \
+            --build-arg QUARKUS_DATASOURCE_PASSWORD=$QUARKUS_DATASOURCE_PASSWORD \
+            -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
             docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 
     deploy-eks:
