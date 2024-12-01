@@ -28,12 +28,12 @@ spec:
 #                  name: db-config
           ports:
             - containerPort: 8080
-          livenessProbe:
-            httpGet:
-              path: /application--deliverynow-user/q/health
-              port: 8080
-            initialDelaySeconds: 20
-            periodSeconds: 30
+#          livenessProbe:
+#            httpGet:
+#              path: /application--deliverynow-user/q/health
+#              port: 8080
+#            initialDelaySeconds: 20
+#            periodSeconds: 30
           resources:
             limits:
               cpu: "200m"
