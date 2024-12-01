@@ -11,7 +11,7 @@
           with:
             fetch-depth: 0
 
-        - run: mvn -B test --file pom.xml
+        - run: mvn clean verify
         - name: Generate JaCoCo Badge
           id: jacoco
           uses: cicirello/jacoco-badge-generator@v2.0.1
