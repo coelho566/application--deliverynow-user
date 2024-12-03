@@ -13,6 +13,10 @@
 
 ![System design](img/diagrama-arquitetura.png)
 
+## | 🖥️ • Desenho da Arquitetura
+
+![System design](img/cobertura-user.png)
+
 
 ## | 🖥️ • Event Storming
 - https://miro.com/miroverse/sistema-de-delivery/?social=copy-link
@@ -25,7 +29,7 @@ Este projeto usa Quarkus, e Java 21
 Construir a imagem da aplicação executando o comando abaixo
 
 ```shell script
-docker build -f src/main/docker/Dockerfile.jvm -t quarkus/service-deliverynow-fiap .
+docker build -f src/main/docker/Dockerfile.jvm -t quarkus/application-deliverynow-user .
 
 ```
 Executar o comando para subir a imagem do mongo e da aplicação
@@ -48,4 +52,4 @@ kubectl delete -k ./k8s
 ```
 
 5.Link do Swagger
-- http://localhost:8080/service-deliverynow-fiap/q/swagger-ui/
+- http://localhost:8080/application--deliverynow-user/q/swagger-ui/
